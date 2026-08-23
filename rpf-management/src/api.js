@@ -31,6 +31,10 @@ async function request(path, opts = {}) {
   return res.text();
 }
 
+export async function listRfps() {
+  return request('/rfps', { method: 'GET' });
+}
+
 export async function createRfp(text) {
   return request('/rfps', { method: 'POST', body: { text } });
 }
@@ -56,9 +60,7 @@ export async function compareRfp(rfpId) {
 }
 
 export async function listProposals() {
-  const res = await fetch('http://localhost:4000/proposals', { credentials: 'include' });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
+  return request('/proposals', { method: 'GET' });
 }
 
 export async function recommendRfp(rfpId) {

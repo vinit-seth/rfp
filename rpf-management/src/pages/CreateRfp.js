@@ -14,9 +14,13 @@ export default function CreateRfp() {
     setLoading(true);
     try {
       const data = await createRfp(text);
+      const rfpId = data?._id || data?.id;
       setResult(data.structuredRfp || data);
-      // navigate to rfp detail if id present
-      if (data.id) navigate(`/rfps/${data.id}`);
+      if (rfpId) {
+        navigate(`/rfps/${rfpId}`);
+      } else {
+        alert('RFP created, but no ID was returned.');
+      }
     } catch (err) {
       console.error(err);
       alert("Failed to create RFP — check console");
@@ -31,7 +35,7 @@ export default function CreateRfp() {
       <form onSubmit={handleCreate} className="card">
         <textarea
           className="input textarea"
-          placeholder="Describe what you need (e.g., 10 laptops, 16GB RAM, 14-inch)"
+          placeholder="Describe what you need (e.g., 10 laptops/monitors, 16GB RAM, 14-inch, warranty, delivery time in weeks/days, payment terms, Total budget and unit budget if known...)"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />

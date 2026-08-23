@@ -30,6 +30,17 @@ async function run() {
     deliveryDays: 30,
     paymentTerms: 'Net 30',
     warranty: '1 year'
+  }, {
+    title: 'Office Laptops & desktop Purchase',
+    description: 'Purchase 25 laptops & desktops with min 8GB RAM, 512GB SSD, 27-inch screen. Preferably Windows.',
+    items: [
+      { name: 'Laptop - 14 inch', qty: 25, specs: '8GB RAM, 512GB SSD', unitBudget: 700000 },
+      { name: 'Desktop - 27 inch', qty: 25, specs: '8GB RAM, 512GB SSD', unitBudget: 700000 }
+    ],
+    budget: 1400000,
+    deliveryDays: 10,
+    paymentTerms: 'Net 30',
+    warranty: '5 year'
   });
   console.log('Created RFP', rfp._id.toString());
 
