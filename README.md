@@ -42,7 +42,7 @@ npm install
 
 ```env
 PORT=4000
-FRONTEND_URL=http://localhost:3000
+FRONTEND_URL=http://localhost:5173
 
 # MongoDB
 MONGODB_URI=mongodb://localhost:27017/rfp_db
