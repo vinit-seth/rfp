@@ -6,6 +6,16 @@ const Proposal = require('../models/Proposal');
 const { parseRfpFromText, rankProposals } = require('../services/aiService');
 const { sendRfpEmail } = require('../services/emailService');
 
+// List all RFPs
+router.get('/', async (req, res) => {
+  try {
+    const rfps = await Rfp.find().sort({ createdAt: -1 });
+    res.json(rfps);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Create RFP from natural language
 router.post('/', async (req, res) => {
   try {

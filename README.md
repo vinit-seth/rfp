@@ -32,6 +32,24 @@ Create a `.env` file in the **backend** folder with at least:
 
 ```
 
+---
+
+# ⚙️ **Backend Setup**
+
+### 1️⃣ Install dependencies
+
+```bash
+cd backend
+npm install
+```
+
+### 2️⃣ Create `.env` file inside `backend/`
+
+```env
+PORT=4000
+FRONTEND_URL=http://localhost:5173
+
+# MongoDB
 MONGODB_URI=mongodb://localhost:27017/rfp_db
 PORT=4000
 FRONTEND_URL=[http://localhost:3000](http://localhost:3000)

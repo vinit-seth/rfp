@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 
 // enable CORS for your frontend origin (development)
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
   methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
   allowedHeaders: ['Content-Type','Authorization','Accept'],
   credentials: true,
@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 4000;
 async function start() {
   try {
     await connectDB(process.env.MONGODB_URI || 'mongodb://localhost:27017/rfp_db');
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       logger.info(`Server running on port ${PORT}`);
     });
 
