@@ -2,9 +2,12 @@ const nodemailer = require('nodemailer');
 const logger = require('../utils/logger');
 
 const transport = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || 'smtp.gmail.com',
-  port: Number(process.env.SMTP_PORT || 587),
-  secure: false,
+  host: process.env.SMTP_HOST || "smtp.gmail.com",
+  port: smtpPort,
+  secure: smtpPort === 465,
+  connectionTimeout: 10000,
+  greetingTimeout: 10000,
+  socketTimeout: 10000,
   auth: {
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
@@ -189,6 +192,23 @@ Team CoDunIt
   }
 }
 
+async function verifyTransport() {
+  try {
+    await transport.verify();
+
+    logger.info(
+      `SMTP connection successful: ${process.env.SMTP_HOST}:${smtpPort}`
+    );
+  } catch (err) {
+    logger.error("SMTP connection failed", {
+      message: err.message,
+      code: err.code,
+      command: err.command,
+    });
+  }
+}
+
 module.exports = {
   sendRfpEmail,
+  verifyTransport
 };

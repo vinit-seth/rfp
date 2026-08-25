@@ -27,11 +27,14 @@ app.use('/proposals', proposalsRoutes);
 
 app.get('/', (req, res) => res.json({ ok: true, ts: new Date().toISOString() }));
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 10000; // updated fallback for production
 
 async function start() {
   try {
     await connectDB(process.env.MONGODB_URI || 'mongodb://localhost:27017/rfp_db');
+
+    await verifyTransport();
+    
     app.listen(PORT, "0.0.0.0", () => {
       logger.info(`Server running on port ${PORT}`);
     });

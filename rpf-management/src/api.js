@@ -1,5 +1,7 @@
 // src/api.js — simple fetch-based wrapper (browser-friendly)
-const BASE = import.meta.env.VITE_API_URL || "http://localhost:4000";
+const BASE = (
+  import.meta.env.VITE_API_URL || "http://localhost:4000"
+).replace(/\/$/, "");   // remove trailing slash for production
 
 async function request(path, opts = {}) {
   const url = `${BASE}${path}`;
