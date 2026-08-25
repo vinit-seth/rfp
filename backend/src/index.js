@@ -8,7 +8,7 @@ const vendorsRoutes = require('./routes/vendors');
 const rfpRoutes = require('./routes/rfp');
 const proposalsRoutes = require('./routes/proposals');
 const { startImapWorker } = require('./services/imapWorker');
-
+const { verifyTransport } = require("./services/emailService");
 
 const app = express();
 app.use(bodyParser.json());
