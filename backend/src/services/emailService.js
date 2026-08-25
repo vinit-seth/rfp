@@ -1,6 +1,8 @@
 const nodemailer = require('nodemailer');
 const logger = require('../utils/logger');
 
+const smtpPort = Number(process.env.SMTP_PORT || 587);
+
 const transport = nodemailer.createTransport({
   host: process.env.SMTP_HOST || "smtp.gmail.com",
   port: smtpPort,
