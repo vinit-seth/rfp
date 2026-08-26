@@ -1,26 +1,14 @@
-const nodemailer = require('nodemailer');
+const { sendEmail } = require("./gmailService");
 const logger = require('../utils/logger');
 
-const smtpPort = Number(process.env.SMTP_PORT || 587);
 
-const transport = nodemailer.createTransport({
-  host: process.env.SMTP_HOST || "smtp.gmail.com",
-  port: smtpPort,
-  secure: smtpPort === 465,
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+
+
 
 async function sendRfpEmail(rfp, vendor) {
   const rfpId = rfp._id.toString();
 
-  const subject =
-    `RFP: ${rfp.title} | RFP ID: ${rfpId}`;
+  const subject = `RFP: ${rfp.title} | RFP ID: ${rfpId}`;
 
   const itemsHtml = Array.isArray(rfp.items)
     ? rfp.items
@@ -166,51 +154,27 @@ Regards,
 Team CoDunIt
 `;
 
-  const mail = {
-    from: process.env.EMAIL_FROM,
-    to: vendor.email,
-    subject,
-    text,
-    html,
-  };
-
   try {
-    const result =
-      await transport.sendMail(mail);
+    const result = await sendEmail({
+      from: process.env.EMAIL_FROM,
+      to: vendor.email,
+      subject,
+      text,
+      html,
+    });
 
-    logger.info(
-      'Sent RFP email',
-      result.messageId
-    );
+    logger.info("Sent RFP email", {
+      messageId: result.id,
+      threadId: result.threadId,
+    });
 
     return result;
   } catch (err) {
-    logger.error(
-      'Error sending RFP email',
-      err
-    );
-
+    logger.error("Error sending RFP email", err);
     throw err;
-  }
-}
-
-async function verifyTransport() {
-  try {
-    await transport.verify();
-
-    logger.info(
-      `SMTP connection successful: ${process.env.SMTP_HOST}:${smtpPort}`
-    );
-  } catch (err) {
-    logger.error("SMTP connection failed", {
-      message: err.message,
-      code: err.code,
-      command: err.command,
-    });
   }
 }
 
 module.exports = {
   sendRfpEmail,
-  verifyTransport
 };

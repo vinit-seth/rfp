@@ -8,7 +8,6 @@ const vendorsRoutes = require('./routes/vendors');
 const rfpRoutes = require('./routes/rfp');
 const proposalsRoutes = require('./routes/proposals');
 const { startImapWorker } = require('./services/imapWorker');
-const { verifyTransport } = require("./services/emailService");
 
 const app = express();
 app.use(bodyParser.json());
@@ -32,8 +31,6 @@ const PORT = process.env.PORT || 10000; // updated fallback for production
 async function start() {
   try {
     await connectDB(process.env.MONGODB_URI || 'mongodb://localhost:27017/rfp_db');
-
-    await verifyTransport();
     
     app.listen(PORT, "0.0.0.0", () => {
       logger.info(`Server running on port ${PORT}`);
