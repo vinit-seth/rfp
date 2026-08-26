@@ -1128,31 +1128,37 @@ async function processProposalEmail(connection, candidate) {
      * 11. Record processed message
      * --------------------------------------------------------
      */
-    if (messageId) {
-      try {
-        await ProcessedMessage.create({
+if (messageId) {
+  try {
+    await ProcessedMessage.create({
+      messageId,
+      uid,
+    });
+
+    logger.info(
+      'Recorded processed vendor email',
+      {
+        messageId,
+        uid,
+      }
+    );
+  } catch (err) {
+    if (err?.code === 11000) {
+      logger.info(
+        'Email was already recorded as processed',
+        {
           messageId,
           uid,
-        });
-
-        logger.info(
-          'Recorded processed vendor email',
-          {
-            messageId,
-            uid,
-          }
-        );
-      } catch (err) {
-        /*
-         * Don't fail the proposal because the
-         * processed-message record could not be created.
-         */
-        logger.warn(
-          'Could not record ProcessedMessage',
-          err?.message || err
-        );
-      }
+        }
+      );
+    } else {
+      logger.warn(
+        'Could not record ProcessedMessage',
+        err?.message || err
+      );
     }
+  }
+}
 
     /*
      * --------------------------------------------------------
@@ -1225,7 +1231,7 @@ async function startImapWorker() {
   const POLL_INTERVAL =
     Number(
       process.env.IMAP_POLL_INTERVAL_MS
-    ) || 30000;
+    ) || 300000;
 
   /**
    * Poll mailbox.

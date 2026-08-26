@@ -61,7 +61,46 @@ async function parseRfpFromText(text) {
 }
 
 async function parseProposalFromEmail(emailText) {
-  const prompt = `You are given a vendor email response. Extract ONLY JSON with fields: vendorName, items (array of {name, qty, specs, unitPrice, totalPrice, notes}), totalPrice, deliveryDays (number or weeks), paymentTerms, warranty, contactEmail (if present), title, description. Return valid JSON only.\n\nEmail:\n\n${emailText}`;
+const prompt = `
+You are given a vendor email response to an RFP.
+
+Extract ONLY valid JSON using exactly these fields:
+
+{
+  "vendorName": string | null,
+  "items": [
+    {
+      "name": string,
+      "qty": number,
+      "specs": string | null,
+      "unitPrice": number | null,
+      "totalPrice": number | null,
+      "notes": string | null
+    }
+  ],
+  "totalPrice": number | null,
+  "deliveryDays": number | null,
+  "paymentTerms": string | null,
+  "warranty": string | null,
+  "contactEmail": string | null,
+  "title": string | null,
+  "description": string | null
+}
+
+Rules:
+- Convert all prices to plain numbers without currency symbols or commas.
+- deliveryDays MUST be a number representing days.
+- Convert weeks to days. For example, "2 weeks" = 14.
+- If delivery information is unavailable, use null.
+- Preserve paymentTerms exactly as stated by the vendor.
+- Preserve warranty exactly as stated by the vendor.
+- Do not invent missing information.
+- Return ONLY valid JSON.
+
+Vendor email:
+
+${emailText}
+`;
 
   try {
     const interaction = await client.interactions.create({
@@ -77,23 +116,19 @@ async function parseProposalFromEmail(emailText) {
     });
 
     return extractJSON(interaction.output_text);
-  } catch (err) {
-    logger.error('parseProposalFromEmail error', err);
-
-    if (err?.status === 429) {
-      logger.warn('Gemini quota exceeded — using mock parser fallback');
-      return {
-        vendorName: 'Unknown (mock)',
-        items: [],
-        total: null,
-        deliveryDays: null,
-        paymentTerms: null,
-        warranty: null,
-        contactEmail: null,
-        notes: emailText.slice(0, 1000)
-      };
+  } catch (error) {
+    if (error?.status === 429 || error?.statusCode === 429) {
+      logger.warn(
+        "Gemini rate limit reached. Proposal will be retried later."
+      );
+    } else {
+      logger.error(
+        "Gemini proposal parsing failed",
+        error
+      );
     }
-    throw err;
+
+    throw error;
   }
 }
 
@@ -120,15 +155,7 @@ async function rankProposals(rfp, proposals) {
     return extractJSON(interaction.output_text);
   } catch (err) {
     logger.error('rankProposals error', err);
-    try {
-      const fallback = proposals.map((p, idx) => {
-        const total = p.total ?? 0;
-        return { id: p._id ?? idx, score: 100 - Math.round(total), rationale: 'Fallback: lower price preferred' };
-      });
-      return fallback;
-    } catch (e) {
-      throw err;
-    }
+    throw err;
   }
 }
 
