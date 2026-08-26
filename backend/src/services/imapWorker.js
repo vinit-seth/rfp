@@ -7,6 +7,7 @@ const Proposal = require('../models/Proposal');
 const Rfp = require('../models/Rfp');
 const ProcessedMessage = require('../models/ProcessedMessage');
 const { parseProposalFromEmail } = require('./aiService');
+const { parseDeliveryDays } = require("../utils/parseDeliveryDays");
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -1083,7 +1084,7 @@ async function processProposalEmail(connection, candidate) {
         total,
 
         deliveryDays:
-          parsedProposal.deliveryDays ||
+          parseDeliveryDays(parsedProposal.deliveryDays) ||
           null,
 
         paymentTerms:
