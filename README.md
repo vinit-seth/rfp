@@ -67,13 +67,10 @@ IMAP_PASS=app-password-or-token
 IMAP_TLS=true
 IMAP_TLS_REJECT_UNAUTHORIZED=false
 
-# SMTP (outbound)
-
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USER=[you@gmail.com](mailto:you@gmail.com)
-EMAIL_PASS=your-smtp-password-or-app-password
-EMAIL_FROM="Your Name [your.email@gmail.com](mailto:your.email@gmail.com)"
+# GMAIL API HTTPS
+GOOGLE_CLIENT_ID=<your-client-id>
+GOOGLE_CLIENT_SECRET=<your-client-secret>
+GOOGLE_REFRESH_TOKEN=<your-refresh-token>
 
 ````
 
@@ -308,4 +305,4 @@ git push
 
 ## Final notes
 
-* This repository is designed as a single-user demo / assignment. Hardening, authentication, multi-user support, and production-grade email/secret handling are left as next steps.
+* This repository is designed as a single-user demo. Hardening, authentication, multi-user support, and production-grade email/secret handling are left as next steps.
