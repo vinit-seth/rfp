@@ -435,7 +435,7 @@ Node.js + Express.js
           <p className="mt-4 text-base leading-7 text-gray-600">
             Hi, I'm{" "}
             <Link
-              to="https://linkedin.com/in/vinit-seth"
+              to="https://github.com/vinit-seth"
               className="font-bold"
               target="_blank"
             >
