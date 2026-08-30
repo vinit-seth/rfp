@@ -97,13 +97,13 @@ export default function RfpDetail() {
         </h1>
 
         {/* Details */}
-<div className="mt-6">
-  <h3 className="mb-4 text-lg font-semibold text-gray-900">
-    RFP Details
-  </h3>
+        <div className="mt-6">
+          <h3 className="mb-4 text-lg font-semibold text-gray-900">
+            RFP Details
+          </h3>
 
-  <RfpDetailsTable rfp={rfp} />
-</div>
+          <RfpDetailsTable rfp={rfp} />
+        </div>
 
         {/* Vendors */}
         <div className="mt-6 rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
@@ -115,29 +115,36 @@ export default function RfpDetail() {
             {vendors.length === 0 && (
               <div className="text-sm text-gray-500">No vendors yet</div>
             )}
-
             {vendors.map((v) => {
               const vId = String(v._id || v.id || v.email || v.name);
-
               const isSelected = selected.has(vId);
 
               return (
                 <label
                   key={vId}
-                  className="flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50"
+                  className="flex min-w-0 cursor-pointer items-start gap-3 rounded-lg border border-gray-200 p-4 transition hover:bg-gray-50"
                 >
                   <input
                     type="checkbox"
                     checked={isSelected}
                     onChange={() => toggle(vId)}
-                    className="mt-1 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500
-                    "
+                    className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                   />
 
-                  <div>
-                    <strong className="text-sm text-gray-900">{v.name}</strong>
+                  <div className="min-w-0 flex-1">
+                    <strong
+                      className="block truncate text-sm text-gray-900"
+                      title={v.name}
+                    >
+                      {v.name}
+                    </strong>
 
-                    <div className="mt-1 text-xs text-gray-500">{v.email}</div>
+                    <div
+                      className="mt-1 truncate text-xs text-gray-500"
+                      title={v.email}
+                    >
+                      {v.email}
+                    </div>
                   </div>
                 </label>
               );

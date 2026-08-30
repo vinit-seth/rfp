@@ -49,6 +49,12 @@ export async function createVendor(payload) {
   return request('/vendors', { method: 'POST', body: payload });
 }
 
+export async function deleteVendor(vendorId) {
+  return request(`/vendors/${vendorId}`, {
+    method: "DELETE",
+  });
+}
+
 export async function sendRfp(rfpId, vendorIds) {
   return request(`/rfps/${rfpId}/send`, { method: 'POST', body: { vendorIds } });
 }

@@ -227,7 +227,7 @@ export default function Proposals() {
                           </div>
 
                           {vendorEmail && (
-                            <div className="mt-1 text-xs text-gray-500">
+                            <div className="mt-1 text-xs text-gray-500 truncate">
                               {vendorEmail}
                             </div>
                           )}

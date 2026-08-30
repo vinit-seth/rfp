@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { getExperience } from "../utils/experience";
 
 export default function About() {
@@ -7,7 +7,6 @@ export default function About() {
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl">
-
         {/* Header */}
         <div className="mb-10">
           <h1 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
@@ -22,11 +21,11 @@ export default function About() {
           </p>
 
           <p className="mt-3 max-w-4xl text-base leading-7 text-gray-600">
-            Instead of manually preparing RFP documents, sending emails,
-            reading vendor responses, and comparing quotations, the application
-            uses AI-assisted processing to automate much of this workflow and
-            present the important information in a structured and
-            easy-to-understand format.
+            Instead of manually preparing RFP documents, sending emails, reading
+            vendor responses, and comparing quotations, the application uses
+            AI-assisted processing to automate much of this workflow and present
+            the important information in a structured and easy-to-understand
+            format.
           </p>
         </div>
 
@@ -41,7 +40,6 @@ export default function About() {
           </p>
 
           <div className="mt-8 space-y-8">
-
             {/* Step 1 */}
             <div className="flex gap-4">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-blue-100 text-sm font-bold text-blue-700">
@@ -55,11 +53,10 @@ export default function About() {
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
                   Start by navigating to the <strong>Create RFP</strong> page.
-                  Describe your procurement requirement using natural
-                  language. You can mention the products you need, quantities,
-                  technical specifications, budget, expected delivery time,
-                  payment terms, warranty requirements, and any other relevant
-                  information.
+                  Describe your procurement requirement using natural language.
+                  You can mention the products you need, quantities, technical
+                  specifications, budget, expected delivery time, payment terms,
+                  warranty requirements, and any other relevant information.
                 </p>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
@@ -70,13 +67,13 @@ export default function About() {
                 </p>
 
                 <div className="mt-3 rounded-lg bg-gray-50 p-4 text-sm text-gray-600">
-                  <strong>Example:</strong> Instead of manually filling a
-                  form, you can write something like:
+                  <strong>Example:</strong> Instead of manually filling a form,
+                  you can write something like:
                   <span className="mt-1 block italic text-gray-500">
-                    "We need 25 laptops and 25 monitors for our Chennai
-                    office. The laptops should have at least 8GB RAM and
-                    512GB SSD. Required delivery is within 14 days with a
-                    budget of ₹15,00,000."
+                    "We need 25 laptops and 25 monitors for our Chennai office.
+                    The laptops should have at least 8GB RAM and 512GB SSD.
+                    Required delivery is within 14 days with a budget of
+                    ₹15,00,000."
                   </span>
                 </div>
               </div>
@@ -94,16 +91,15 @@ export default function About() {
                 </h3>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  Once the RFP is created, the application stores the
-                  structured information in MongoDB. The RFP detail page
-                  allows you to review the generated requirement before
-                  sending it to vendors.
+                  Once the RFP is created, the application stores the structured
+                  information in MongoDB. The RFP detail page allows you to
+                  review the generated requirement before sending it to vendors.
                 </p>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  This gives you an opportunity to verify important details
-                  such as item quantities, budget, delivery requirements,
-                  payment terms, and warranty before proceeding.
+                  This gives you an opportunity to verify important details such
+                  as item quantities, budget, delivery requirements, payment
+                  terms, and warranty before proceeding.
                 </p>
               </div>
             </div>
@@ -177,8 +173,10 @@ export default function About() {
                 <p className="mt-2 text-sm leading-6 text-gray-600">
                   The system identifies the relevant RFP using the RFP ID
                   contained in the email and processes the vendor's response.
-                  Previously processed emails are tracked to prevent the same
-                  proposal from being processed multiple times.
+                  The mailbox is checked periodically, so please allow a few
+                  minutes after replying before the proposal appears in the
+                  application. Previously processed emails are tracked to
+                  prevent the same proposal from being processed multiple times.
                 </p>
               </div>
             </div>
@@ -203,9 +201,9 @@ export default function About() {
                 </p>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  The extracted information is stored as a proposal in
-                  MongoDB, making vendor responses much easier to compare than
-                  reading individual emails manually.
+                  The extracted information is stored as a proposal in MongoDB,
+                  making vendor responses much easier to compare than reading
+                  individual emails manually.
                 </p>
               </div>
             </div>
@@ -222,16 +220,18 @@ export default function About() {
                 </h3>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
-                  Navigate to the <strong>Proposals</strong> page to view
-                  vendor responses in a structured format. Each proposal shows
-                  the vendor, total price, proposed items, delivery timeline,
+                  Navigate to the <strong>Proposals</strong> page to view vendor
+                  responses in a structured format. Each proposal shows the
+                  vendor, total price, proposed items, delivery timeline,
                   payment terms, and warranty.
                 </p>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
                   The proposal list is periodically refreshed so that newly
                   processed vendor responses can appear without requiring the
-                  user to manually reload the page.
+                  user to manually reload the page.<strong> If you are testing the
+                  application, please allow a few minutes after sending a vendor
+                  reply for it to be processed and appear here</strong>.
                 </p>
               </div>
             </div>
@@ -255,9 +255,9 @@ export default function About() {
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
                   The comparison process evaluates the available proposals
-                  against important procurement criteria such as price,
-                  delivery timeline, warranty, payment terms, and the original
-                  RFP requirements.
+                  against important procurement criteria such as price, delivery
+                  timeline, warranty, payment terms, and the original RFP
+                  requirements.
                 </p>
 
                 <p className="mt-2 text-sm leading-6 text-gray-600">
@@ -283,8 +283,8 @@ export default function About() {
                 <p className="mt-2 text-sm leading-6 text-gray-600">
                   After comparing the proposals, the{" "}
                   <strong>Recommend Vendor</strong> action becomes available.
-                  The recommendation process evaluates the available options
-                  and provides a ranked recommendation along with a concise
+                  The recommendation process evaluates the available options and
+                  provides a ranked recommendation along with a concise
                   rationale.
                 </p>
 
@@ -296,7 +296,6 @@ export default function About() {
                 </p>
               </div>
             </div>
-
           </div>
         </section>
 
@@ -312,11 +311,8 @@ export default function About() {
           </p>
 
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
-
             <div className="rounded-lg border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold text-gray-900">
-                MongoDB
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900">MongoDB</h3>
 
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 MongoDB is used as the application's database. It stores RFPs,
@@ -331,17 +327,15 @@ export default function About() {
               </h3>
 
               <p className="mt-2 text-sm leading-6 text-gray-600">
-                Express.js is used to build the backend REST APIs. The API
-                layer handles operations such as creating RFPs, managing
-                vendors, retrieving proposals, sending RFP emails, comparing
-                proposals, and generating vendor recommendations.
+                Express.js is used to build the backend REST APIs. The API layer
+                handles operations such as creating RFPs, managing vendors,
+                retrieving proposals, sending RFP emails, comparing proposals,
+                and generating vendor recommendations.
               </p>
             </div>
 
             <div className="rounded-lg border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold text-gray-900">
-                React
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900">React</h3>
 
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 React powers the frontend application. The UI is divided into
@@ -352,9 +346,7 @@ export default function About() {
             </div>
 
             <div className="rounded-lg border border-gray-200 p-5">
-              <h3 className="text-lg font-semibold text-gray-900">
-                Node.js
-              </h3>
+              <h3 className="text-lg font-semibold text-gray-900">Node.js</h3>
 
               <p className="mt-2 text-sm leading-6 text-gray-600">
                 Node.js provides the runtime environment for the backend. It
@@ -363,7 +355,6 @@ export default function About() {
                 processing layer.
               </p>
             </div>
-
           </div>
 
           {/* Supporting technologies */}
@@ -384,8 +375,8 @@ export default function About() {
               </li>
 
               <li>
-                <strong>Mongoose</strong> for MongoDB data modeling and
-                database interaction.
+                <strong>Mongoose</strong> for MongoDB data modeling and database
+                interaction.
               </li>
 
               <li>
@@ -395,9 +386,8 @@ export default function About() {
 
               <li>
                 <strong>AI-assisted parsing and evaluation</strong> for
-                converting unstructured vendor emails into structured
-                proposals and generating comparison and recommendation
-                insights.
+                converting unstructured vendor emails into structured proposals
+                and generating comparison and recommendation insights.
               </li>
             </ul>
           </div>
@@ -410,7 +400,7 @@ export default function About() {
 
             <div className="mt-4 overflow-x-auto rounded-lg bg-gray-900 p-5">
               <pre className="text-sm leading-7 text-gray-100">
-{`React + Tailwind CSS
+                {`React + Tailwind CSS
         │
         │ REST API
         ▼
@@ -443,15 +433,22 @@ Node.js + Express.js
           </h2>
 
           <p className="mt-4 text-base leading-7 text-gray-600">
-            Hi, I'm <Link to="https://linkedin.com/in/vinit-seth" className="font-bold" target="_blank">Vinit Seth</Link>, a MERN Stack Developer with
+            Hi, I'm{" "}
+            <Link
+              to="https://linkedin.com/in/vinit-seth"
+              className="font-bold"
+              target="_blank"
+            >
+              Vinit Seth
+            </Link>
+            , a MERN Stack Developer with
             <strong> {experience} of professional experience</strong>{" "}
           </p>
 
           <p className="mt-4 text-base leading-7 text-gray-600">
-            I started my corporate journey in{" "}
-            <strong>January 2024</strong>, where I have worked on developing
-            and contributing to web applications using modern JavaScript and
-            full-stack technologies.
+            I started my corporate journey in <strong>January 2024</strong>,
+            where I have worked on developing and contributing to web
+            applications using modern JavaScript and full-stack technologies.
           </p>
 
           <p className="mt-4 text-base leading-7 text-gray-600">
@@ -477,14 +474,6 @@ Node.js + Express.js
             automation, AI-assisted processing, and a user-friendly interface.
           </p>
         </section>
-
-        {/* Footer */}
-        <div className="py-8 text-center">
-          <p className="text-sm text-gray-400">
-            AI RFP Manager • MERN Stack • AI-assisted procurement workflow
-          </p>
-        </div>
-
       </div>
     </div>
   );
