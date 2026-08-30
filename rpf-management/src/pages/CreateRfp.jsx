@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { createRfp } from '../api';
-import { useNavigate } from 'react-router-dom';
+import { createRfp } from "../api";
+import { useNavigate } from "react-router-dom";
 import RfpDetailsTable from "./RfpDetailTable";
 
 export default function CreateRfp() {
@@ -20,7 +20,7 @@ export default function CreateRfp() {
       if (rfpId) {
         navigate(`/rfps/${rfpId}`);
       } else {
-        alert('RFP created, but no ID was returned.');
+        alert("RFP created, but no ID was returned.");
       }
     } catch (err) {
       console.error(err);
@@ -33,11 +33,11 @@ export default function CreateRfp() {
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-4xl">
-
-        <h1 className="mb-6 text-3xl font-bold text-gray-900">
-          Create RFP
-        </h1>
-        <form onSubmit={handleCreate} className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900">Create RFP</h1>
+        <form
+          onSubmit={handleCreate}
+          className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+        >
           <textarea
             className="
               min-h-48 w-full resize-y rounded-lg border
@@ -53,22 +53,25 @@ export default function CreateRfp() {
             onChange={(e) => setText(e.target.value)}
           />
           <div className="mt-4 flex justify-end">
-            <button className="rounded-lg border border-gray-500 bg-gray-300 px-4 py-2.5 text-sm font-medium text-black transition hover:bg-blue-400 active:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50" type="submit" disabled={loading}>
+            <button
+              type="submit"
+              disabled={!text.trim() || loading}
+              className="rounded-lg border border-gray-500 bg-gray-300 px-4 py-2.5 text-sm font-medium text-black transition enabled:hover:bg-blue-400 enabled:active:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
+            >
               {loading ? "Parsing…" : "Create RFP"}
             </button>
           </div>
         </form>
 
-{result && (
-  <div className="mt-6">
-    <h3 className="mb-4 text-lg font-semibold text-gray-900">
-      Structured RFP
-    </h3>
+        {result && (
+          <div className="mt-6">
+            <h3 className="mb-4 text-lg font-semibold text-gray-900">
+              Structured RFP
+            </h3>
 
-    <RfpDetailsTable rfp={result} />
-  </div>
-)}
-
+            <RfpDetailsTable rfp={result} />
+          </div>
+        )}
       </div>
     </div>
   );
